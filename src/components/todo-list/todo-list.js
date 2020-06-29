@@ -6,14 +6,14 @@ import "./todo-list.css";
 //Функциональный компонент TodoList 
 const TodoList = ( { todos, onDeleted } ) => {
 
-  const elements = todos.map((item)=> {
-    const {id, ...itemProps} = item;
+  const elements = todos.map( (item) => {
+    const { id, ...itemProps } = item;
 
     return (
-      <li key={id} className="list-group-item">
+      <li key = { id } className="list-group-item">
         <TodoListItem 
           { ...itemProps } 
-          onDeleted= {()=> onDeleted(id)}/>
+          onDeleted = { () => onDeleted(id) }/>
       </li>
     );
   });

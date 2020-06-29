@@ -26,7 +26,8 @@ const App = () => {
         
         <TodoList 
           todos = {todoData}
-          onDeleted = { (id) => console.log('del', id)}/>
+          onDeleted = { (id) => console.log('del', id) }
+          />
       </div>
       );
     };
