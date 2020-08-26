@@ -6,10 +6,12 @@ import PostStatusFilter from "../post-status-filter";
 import PostList from "../post-list";
 import PostAddForm from "../post-add-form";
 
+import "./app.css";
+
 
 const App = () => {
   return ( 
-  <div classNmae="app">
+  <div className="app">
     <Header/>
 
     <div className="search-panel d-flex">
