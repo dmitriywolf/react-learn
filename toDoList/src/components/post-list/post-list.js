@@ -4,15 +4,15 @@ import PostListItem from "../post-list-item";
 
 import "./post-list.css";
 
-const PostList = ()=> {
+const PostList = (props ) => {
    return (
 
     <ul className="app-list list-group" >
 
-      <PostListItem/>
-      <PostListItem/>
-      <PostListItem/>
-      <PostListItem/>
+      <PostListItem label="Going to learn React" important/>
+      <PostListItem label="Going to learn Redux"/>
+      <PostListItem label="Going to learn Next.js"/>
+      <PostListItem label="Going to learn Node.js"/>
 
     </ul>
    )
