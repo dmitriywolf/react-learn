@@ -8,9 +8,11 @@ export default class PostListiten extends Component {
     super(props);
     this.state = {
       important: false,
+      like: false
     };
 
     this.onImportant = this.onImportant.bind(this);
+    this.onLike = this.onLike.bind(this);
   }
 
   onImportant(){
@@ -19,20 +21,31 @@ export default class PostListiten extends Component {
     }))
   }
 
+  onLike(){
+    this.setState( ({like}) => ({
+      like: !like
+    }))
+  }
+
   render (){
     const {label} = this.props;
-    const {important}  = this.state;
-    
+    const {important, like}  = this.state;
+
+
     let classNames = 'app-list-item d-flex justify-content-between';
 
     if(important){
       classNames += ' important';
     }
 
+    if(like){
+      classNames += ' like';
+    }
+
 
     return (
       <div className={classNames}>
-        <span className="app-list-item-label">
+        <span className="app-list-item-label" onClick={this.onLike}>
         {label}
       </span>
 
@@ -48,7 +61,7 @@ export default class PostListiten extends Component {
           className="btn-trash btn-sm">
           <i className="fa fa-trash-o"></i>
         </button>
-          <i className="fa fa-heart"></i>
+          <i className="fa fa-heart" ></i>
       </div>
     </div>
   
