@@ -3,9 +3,9 @@ import "./post-add-form.css";
 
 
 
-const PostAddForm = () => {
+const PostAddForm = ({onAddItem}) => {
   return ( 
-    <form className="bottom-panel d-flex">
+    <div className="bottom-panel d-flex">
       <input
         type="text"
         placeholder="Напишите свою следующую задачу"
@@ -13,9 +13,10 @@ const PostAddForm = () => {
       />
       <button
         type="submit"
-        className="btn btn-outline-secondary">
+        className="btn btn-outline-secondary"
+        onClick={ () => onAddItem("hello Item") }>
         Добавить</button>
-    </form>
+    </div>
   );
 
 

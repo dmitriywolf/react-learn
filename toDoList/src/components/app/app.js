@@ -14,9 +14,6 @@ const AppBlock = styled.div`
   margin: 0 auto;
   max-width: 800px;
 `
-
-
-
 export default class App extends Component {
 
   constructor (props){
@@ -24,15 +21,17 @@ export default class App extends Component {
 
     this.state = {
       data : [
-        {label: "Going to learn React", important: false, id: "1wefwefw"},
-        {label: "Going to learn Redux", important: true, id: "1wefwef"},
-        {label: "Going to learn Next.js", id: "1fwfwf"},
-        {label: "Going to learn Node.js", id: 14}
+        {label: "Going to learn React", important: false, id: 1},
+        {label: "Going to learn Redux", important: true, id: 2},
+        {label: "Going to learn Next.js", id: 3},
       ]
 
     };
 
     this.deleteItem = this.deleteItem.bind(this);
+    this.addItem  = this.addItem.bind(this);
+
+    this.maxId = 4;
 
   }
 
@@ -49,6 +48,24 @@ export default class App extends Component {
         data: newArr
       }
     });
+  }
+
+  addItem(body){
+
+    const newItem = {
+      label: body,
+      important: false,
+      id: this.maxId++
+    }
+
+    this.setState( ({data}) => {
+
+      const newArr = [...data, newItem];
+
+      return {
+        data: newArr
+      }
+    })
   }
 
  
@@ -68,7 +85,10 @@ render(){
       onDelete={this.deleteItem}
       />
   
-      <PostAddForm/>
+      <PostAddForm
+        onAddItem={this.addItem}
+      
+      />
       
     </AppBlock>
     )
