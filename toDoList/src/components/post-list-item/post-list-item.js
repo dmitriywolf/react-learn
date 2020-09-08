@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import "./post-list-item.scss";
 
-
-
-export default class PostListiten extends Component {
+export default class PostListItem extends Component {
 
   render (){
     const {label, onDelete, onToggleImportant, onToggleLiked, important, like} = this.props;
@@ -17,7 +15,6 @@ export default class PostListiten extends Component {
     if(like){
       classNames += ' like';
     }
-
 
     return (
       <div className={classNames}>
@@ -38,7 +35,7 @@ export default class PostListiten extends Component {
           onClick = {onDelete}>
           <i className="fa fa-trash-o"></i>
         </button>
-          <i className="fa fa-heart" ></i>
+          <i className="fa fa-heart"></i>
       </div>
     </div>
   
