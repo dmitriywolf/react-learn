@@ -1,4 +1,4 @@
-export default class GameService extends Component {
+export default class GameService {
 
   constructor(){
     this._apiBase = 'https://www.anapioficeandfire.com/api'
@@ -10,9 +10,7 @@ export default class GameService extends Component {
     if(!result.ok) {
       throw new Error(`Could not fetch ${url}, status: ${result.status}`);
     }
-
     return await result.json();
-
   };
 
 
@@ -23,14 +21,22 @@ export default class GameService extends Component {
   getCharacter(id) {
     return this.getResource(`/characters/${id}`);
   }
+
+  getAllHouses(){
+    return this.getResource(`/houses/`);
+  }
+
+  getAllHouse(id){
+    return this.getResource(`/houses/${id}/`);
+  }
+
+  getAllBooks(){
+    return this.getResource(`/books/`);
+  }
+
+  getBook(id){
+    return this.getResource(`/books/${id}/`);
+  }
+
 }
 
-const got = new GameService();
-
-got.getAllCharacters()
-.then(res => res.forEach(item => {
-  console.log(item.name)
-}));
-
-got.getCharacter(133)
-.then(res => console.log(res));

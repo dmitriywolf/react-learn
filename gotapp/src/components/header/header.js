@@ -3,7 +3,7 @@ import './header.css';
 
 const Header = () => {
     return (
-        <header>
+        <header className="header">
             <h1 className="header__title">
                 <a href="#">
                 Game of Thrones DB
