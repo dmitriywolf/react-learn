@@ -1,41 +1,31 @@
 import React, {Component} from 'react';
 import './charDetails.css';
 
-
-
 export default class CharDetails extends Component {
 
 
-    state = {
-        name: null,
-        gender: null,
-        born: null,
-        died: null,
-        culture: null
-    }
-
     render() {
 
-        const {name, gender, born, died, culture} = this.state;
+        
         return (
             <div className="char-details rounded">
-                <h4>Random Character: {name}</h4>
+                <h4>Random Character: </h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Gender</span>
-                        <span>{gender}</span>
+                        <span></span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Born</span>
-                        <span>{born}</span>
+                        <span></span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Died</span>
-                        <span>{died}</span>
+                        <span></span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <span className="term">Culture</span>
-                        <span>{culture}</span>
+                        <span></span>
                     </li>
                 </ul>
             </div>
