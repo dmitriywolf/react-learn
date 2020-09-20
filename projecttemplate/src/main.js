@@ -1,11 +1,7 @@
 class App {
-
-  constructor(){
-    this.run = (name="World") => {
+    run = (name="World") => {
       console.log(`Hello ${name}`);
     };
-  }
-  
 }
 
 const app = new App();
