@@ -1,7 +1,10 @@
-import Log from "./log";
-import Calc from "./calc";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import css from "./main.scss";
 
-const calc = new Calc();
-const log = new Log();
 
-log.log(calc.add(1,2,3,4));
+const App = ()=> {
+  return <h1>Hello Dima!</h1>
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'));
