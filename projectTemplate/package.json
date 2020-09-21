@@ -6,6 +6,11 @@
   "scripts": {
     "babel": "npx babel src --out-dir build"
   },
+  "browserslist": [
+    "last 5 chrome versions",
+    "last 5 firefox versions",
+    "edge 18"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -13,6 +18,12 @@
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/preset-env": "^7.11.5"
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
