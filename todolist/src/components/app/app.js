@@ -2,9 +2,9 @@ import React, {Component} from "react";
 
 import AppHeader from "../app-header";
 import ToDoList from "../todo-list/";
-import SearchBox from "../search-box";
 import ItemStatusFilter from "../item-status-filter";
 import AddItem from "../add-item";
+import SearchPanel from '../search-panel';
 
 import './app.css';
 
@@ -106,7 +106,7 @@ export default class App extends Component {
        <AppHeader toDo={todoCount} done={doneCount}/>
 
        <div className="top-panel d-flex">
-         <SearchBox />
+         <SearchPanel />
          <ItemStatusFilter />
        </div>
 
