@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWepackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 
 module.exports = {
@@ -6,21 +8,20 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'dist'),
   },
 
 
   module: {
     rules: [
-
-      // Загрузка и компиляция js|jsx кода babel
+      // Babel-loader
       { 
         test: /\.(js|jsx)$/, 
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
 
-      // Загрузка картитинок
+      // Loading Images
      {
        test: /\.(png|jpg|jpeg|gif|ico)$/,
        use: [{
@@ -31,7 +32,7 @@ module.exports = {
           }
         }]
       },
-      // Загрузка шрифтов
+      // Loading Fonts
       {
         test: /\.(ttf|otf|eot|woff|woff2)$/,
         use: [{
@@ -41,14 +42,34 @@ module.exports = {
              name: '[name].[ext]'
            }
          }]
-       }
+       },
 
-      
+       // Loading CSS
+       {
+        test: /\.(css)$/,
+        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
+       },
+
+       // Loading SCSS/SASS
+       {
+        test: /\.(s[ca]ss)$/,
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+       }
     ]
   },
 
   plugins: [
+    new HtmlWepackPlugin({
+      template: 'public/index.html'
+    }),
 
+    new MiniCssExtractPlugin({
+      filename: 'main-[hash:8].css'
+    })
+      
+  ],
 
-  ]
+  devServer: {
+    open: true   // open in browser
+  }
 };
