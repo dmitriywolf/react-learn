@@ -20,16 +20,28 @@ module.exports = {
         loader: 'babel-loader',
       },
 
-      // Загрузка файлов (в данном случае изображения)
+      // Загрузка картитинок
      {
        test: /\.(png|jpg|jpeg|gif|ico)$/,
        use: [{
           loader: 'file-loader',
           options: {
-            outputPath: 'img'
+            outputPath: 'img',
+            name: '[name]-[sha1:hash:7].[ext]'
           }
         }]
       },
+      // Загрузка шрифтов
+      {
+        test: /\.(ttf|otf|eot|woff|woff2)$/,
+        use: [{
+           loader: 'file-loader',
+           options: {
+             outputPath: 'fonts',
+             name: '[name].[ext]'
+           }
+         }]
+       }
 
       
     ]
