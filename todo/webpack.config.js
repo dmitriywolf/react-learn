@@ -2,74 +2,95 @@ const path = require('path');
 const HtmlWepackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+module.exports = ( env = {} ) =>  {
 
-module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
+  // Определяем значение перменной
+  const {mode = 'development'} = env;
+  const isProd = mode === 'production';
+  const isDev = mode === 'development';
 
+  const getStyleLoaders = () => {
+    return [
+      isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+      'css-loader'
+    ];
+  };
 
-  module: {
-    rules: [
-      // Babel-loader
-      { 
-        test: /\.(js|jsx)$/, 
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
+  const getPlugins = () => {
+    const plugins = [
+      new HtmlWepackPlugin({
+        template: 'public/index.html'
+      })
+    ];
 
-      // Loading Images
-     {
-       test: /\.(png|jpg|jpeg|gif|ico)$/,
-       use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'img',
-            name: '[name]-[sha1:hash:7].[ext]'
-          }
-        }]
-      },
-      // Loading Fonts
-      {
-        test: /\.(ttf|otf|eot|woff|woff2)$/,
-        use: [{
-           loader: 'file-loader',
-           options: {
-             outputPath: 'fonts',
-             name: '[name].[ext]'
-           }
-         }]
-       },
+    if(isProd) {
+      plugins.push(new MiniCssExtractPlugin({
+        filename: 'main-[hash:8].css'
+      }))
+    }
 
-       // Loading CSS
+    return plugins;
+  };
+
+  return {
+    mode: isProd ? 'production' : isDev && 'development',
+    entry: './src/index.js',
+    output: {
+      filename: isProd ? 'bundle-[hash:8].js' : undefined,
+      path: path.resolve(__dirname, 'dist'),
+    },
+  
+  
+    module: {
+      rules: [
+        // Babel-loader
+        { 
+          test: /\.(js|jsx)$/, 
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+        },
+  
+        // Loading Images
        {
-        test: /\.(css)$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
-       },
-
-       // Loading SCSS/SASS
-       {
-        test: /\.(s[ca]ss)$/,
-        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-       }
-    ]
-  },
-
-  plugins: [
-    new HtmlWepackPlugin({
-      template: 'public/index.html'
-    }),
-
-    new MiniCssExtractPlugin({
-      filename: 'main-[hash:8].css'
-    })
-      
-  ],
-
-  devServer: {
-    open: true   // open in browser
-  }
+         test: /\.(png|jpg|jpeg|gif|ico)$/,
+         use: [{
+            loader: 'file-loader',
+            options: {
+              outputPath: 'img',
+              name: '[name]-[sha1:hash:7].[ext]'
+            }
+          }]
+        },
+        // Loading Fonts
+        {
+          test: /\.(ttf|otf|eot|woff|woff2)$/,
+          use: [{
+             loader: 'file-loader',
+             options: {
+               outputPath: 'fonts',
+               name: '[name].[ext]'
+             }
+           }]
+         },
+  
+         // Loading CSS
+         {
+          test: /\.(css)$/,
+          use: getStyleLoaders()
+         },
+  
+         // Loading SCSS/SASS
+         {
+          test: /\.(s[ca]ss)$/,
+          use: [ ...getStyleLoaders(), 'sass-loader']
+         }
+      ]
+    },
+  
+    plugins: getPlugins(),
+  
+    devServer: {
+      open: true   // open in browser
+    }
+  };
 };
