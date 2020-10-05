@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import AppTitle from '../app-title/app-title'
+
+import AppHeader from "../app-header/app-header";
+import AppTitle from '../app-title/app-title';
 import SearchPanel from '../search-panel/search-panel';
 import TasksList from "../task-list/tasks-list";
+import AddTask from '../add-task/add-task';
+
 
 export default class App extends Component {
 
@@ -23,9 +27,12 @@ export default class App extends Component {
   return (
 
     <div>
+
+
       <AppTitle/>
       <SearchPanel/>
       <TasksList tasks={tasksArr}/>
+      <AddTask/>
 
 
 
