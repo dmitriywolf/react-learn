@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import AppHeader from "../app-header/app-header";
-import AppTitle from '../app-title/app-title';
 import SearchPanel from '../search-panel/search-panel';
+import TaskFilter from '../task-filter/task-filter';
+
+
 import TasksList from "../task-list/tasks-list";
 import AddTask from '../add-task/add-task';
 
@@ -28,14 +30,14 @@ export default class App extends Component {
 
     <div>
 
-
-      <AppTitle/>
-      <SearchPanel/>
+      <AppHeader/>
+      <div>
+         <SearchPanel/>
+         <TaskFilter/>
+      </div>
+      
       <TasksList tasks={tasksArr}/>
       <AddTask/>
-
-
-
     </div>
     
   )

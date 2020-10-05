@@ -10,9 +10,25 @@ export default class TaskItem extends Component {
     const { text, important=false } = this.props;
 
     const spanStyle = {
-      color: important ? "red" : "black"
+      color: important ? "red" : "black",
+      fontWeight: important ? "bold" : "normal"
     }
 
-    return  <span style={spanStyle}>{text}</span>
-  }
+    return(
+      <span>
+        <span style={spanStyle}>
+          {text}
+        </span>
+        <button type="button">
+          Віполнено
+        </button>
+        <button type="button">
+          Важно
+        </button>
+
+
+
+      </span>
+    );
+  };
 };
