@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import "./task-item.css";
 
 export default class TaskItem extends Component {
   constructor(props) {
@@ -10,25 +11,20 @@ export default class TaskItem extends Component {
     const { text, important=false } = this.props;
 
     const spanStyle = {
-      color: important ? "red" : "black",
+      color: important ? "grey" : "black",
       fontWeight: important ? "bold" : "normal"
     }
 
     return(
-      <span>
+      <div className="task-item">
         <span style={spanStyle}>
           {text}
         </span>
-        <button className="btn btn-outline-danger" type="button">
-          Delete
-        </button>
-        <button className="btn btn-outline-info" type="button">
-          Important
-        </button>
-
-
-
-      </span>
+        <span className="btn-group">
+          <button className="btn btn-outline-danger task-item-btn" type="button">Delete</button>
+          <button className="btn btn-outline-info task-item-btn" type="button ">Important</button>
+        </span>
+      </div>
     );
   };
 };

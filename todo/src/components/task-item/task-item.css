@@ -1,0 +1,22 @@
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  margin: 5px 0;
+  font-size: 16px;
+  line-height: 1.1;
+  transition: all 0.3s linear;
+}
+
+.task-item:hover {
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.task-item-btn {
+  padding: 2px 8px;
+}
+
+.task-item span:hover {
+  cursor: pointer;
+}

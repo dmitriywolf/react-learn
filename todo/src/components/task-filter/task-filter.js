@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import "./task-filter.css";
 
 export default class TaskFilter extends Component {
   constructor() {
@@ -7,11 +8,11 @@ export default class TaskFilter extends Component {
 
   render(){
     return (
-      <div>
-      <button className="btn btn-outline-dark active" type="button" >All</button>
-      <button className="btn btn-outline-dark" type="button">Active</button>
-      <button className="btn btn-outline-dark" type="button">Done</button>
-    </div>
+      <div className="task-filter btn-group">
+        <button className="task-filter-btn btn btn btn-outline-dark active" type="button" >All</button>
+        <button className="task-filter-btn btn btn-outline-dark" type="button">Active</button>
+        <button className="task-filter-btn btn btn-outline-dark" type="button">Done</button>
+      </div>
     );
   }
 

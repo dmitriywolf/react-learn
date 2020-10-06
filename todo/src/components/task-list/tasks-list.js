@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TaskItem from '../task-item/'
+import "./tasks-list.css";
 
 
 
@@ -27,7 +28,7 @@ export default class TasksList extends React.Component {
     });
   
     return (
-      <ul> 
+      <ul className="tasks-list"> 
         {elements}
       </ul>
     )

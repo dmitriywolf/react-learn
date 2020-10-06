@@ -1,4 +1,17 @@
 .app-header {
   display: flex;
   flex-direction: column;
+  color: grey;
+}
+
+.app-header__title {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.app-header__info {
+  font-size: 18px;
+  text-align: right;
+  text-decoration: underline;
 }
