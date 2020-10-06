@@ -24,6 +24,15 @@
   border-radius: 3px;
 }
 
-.task-item span:hover {
+.task-item__text {
   cursor: pointer;
+}
+
+.task-item__text.important {
+  font-weight: bold;
+  color: grey;
+}
+
+.task-item__text.done {
+  text-decoration: line-through;
 }
