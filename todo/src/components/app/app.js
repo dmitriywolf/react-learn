@@ -21,9 +21,6 @@ export default class App extends Component {
     {id: 4, text: 'И наконец MongoDB', important: false}
   ];
 
-
-
-
   return (
 
     <div className="app">

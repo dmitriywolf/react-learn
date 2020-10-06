@@ -13,8 +13,15 @@
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-.task-item-btn {
-  padding: 2px 8px;
+.task-item__btn {
+  width: 30px;
+  height: 30px;
+
+  margin: 0 2px;
+  padding: 0 4px;
+  border: 1px solid grey;
+  background-color: transparent;
+  border-radius: 3px;
 }
 
 .task-item span:hover {
