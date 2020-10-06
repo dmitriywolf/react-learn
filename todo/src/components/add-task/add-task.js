@@ -15,8 +15,8 @@ export default class AddTask extends Component {
       <div>
 
       <input type="text" 
-      placeholder="type to create task" />
-      <button>Add Tasks</button>
+       placeholder="type to create task" />
+      <button className="btn btn-outline-dark" type="submit">Add Tasks</button>
 
 
       </div>

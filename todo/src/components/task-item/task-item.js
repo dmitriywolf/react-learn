@@ -19,11 +19,11 @@ export default class TaskItem extends Component {
         <span style={spanStyle}>
           {text}
         </span>
-        <button type="button">
-          Віполнено
+        <button className="btn btn-outline-danger" type="button">
+          Delete
         </button>
-        <button type="button">
-          Важно
+        <button className="btn btn-outline-info" type="button">
+          Important
         </button>
 
 

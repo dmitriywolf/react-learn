@@ -3,18 +3,16 @@ import React, { Component } from 'react';
 import AppHeader from "../app-header/app-header";
 import SearchPanel from '../search-panel/search-panel';
 import TaskFilter from '../task-filter/task-filter';
-
-
 import TasksList from "../task-list/tasks-list";
 import AddTask from '../add-task/add-task';
+
+import "./app.css";
 
 
 export default class App extends Component {
 
 
-
  render() {
-
 
   const tasksArr = [
     {id: 1, text: 'Изучить React + Redux', important: true}, 
@@ -28,9 +26,10 @@ export default class App extends Component {
 
   return (
 
-    <div>
+    <div className="app">
 
-      <AppHeader/>
+      <AppHeader todo="3" done="1"/>
+
       <div>
          <SearchPanel/>
          <TaskFilter/>
@@ -39,9 +38,9 @@ export default class App extends Component {
       <TasksList tasks={tasksArr}/>
       <AddTask/>
     </div>
-    
-  )
- }
+  );
+
+ };
 }
 
 

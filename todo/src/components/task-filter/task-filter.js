@@ -8,9 +8,9 @@ export default class TaskFilter extends Component {
   render(){
     return (
       <div>
-      <button type="button">All</button>
-      <button type="button">Active</button>
-      <button type="button">Done</button>
+      <button className="btn btn-outline-dark active" type="button" >All</button>
+      <button className="btn btn-outline-dark" type="button">Active</button>
+      <button className="btn btn-outline-dark" type="button">Done</button>
     </div>
     );
   }

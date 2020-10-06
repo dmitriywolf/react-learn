@@ -1,5 +1,5 @@
 import React from 'react';
-import AppTitle from '../app-title/app-title';
+import "./app-header.css";
 
 
 export default class AppHeader extends React.Component {
@@ -8,11 +8,13 @@ export default class AppHeader extends React.Component {
   }
 
   render(){
-    return (
-      <div>
-        <AppTitle/>
-        <h2>5 more to do, 1 done</h2>
 
+    const { todo, done } = this.props;
+
+    return (
+      <div className="app-header">
+        <h1 className="app-header__title">Task List</h1>
+        <h2 className="app-header__info">  {todo} more to do, {done} done</h2>
       </div>
     )
   }
