@@ -7,6 +7,8 @@ export default class AddTask extends Component {
 
   render() {
 
+    const { addItem } = this.props;
+
     return (
       <div className="add-task input-group">
 
@@ -16,7 +18,8 @@ export default class AddTask extends Component {
 
           <div className="input-group-prepend"> 
             <button className="btn btn-outline-dark" 
-               type="submit">
+               type="button"
+               onClick={ addItem }>
               Add Task
            </button>
           </div>

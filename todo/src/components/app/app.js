@@ -11,6 +11,8 @@ import "./app.css";
 
 export default class App extends Component {
 
+  maxId = 100;
+
   state = {
     tasksArr: [
       {id: 1, text: 'Изучить React + Redux', important: true}, 
@@ -42,6 +44,28 @@ export default class App extends Component {
     });
   };
 
+  itemAdd = () => {
+
+    // создаем новый элемент 
+    const newItem = {
+      id: this.maxId++,
+      text: "New Task",
+      important: false
+    };
+
+    this.setState( ( { tasksArr } ) => {
+      // создаем новый массив который состоит из старого + новый элемент
+      const newArr = [
+        ...tasksArr, newItem
+      ];
+
+      return {
+        tasksArr: newArr
+      };
+
+    });
+  };
+
  render() {
 
   const { tasksArr } = this.state;
@@ -58,9 +82,9 @@ export default class App extends Component {
       
       <TasksList 
         tasks={ tasksArr }
-        itemDeleted={ this.itemDeleted }
+        itemDeleted = { this.itemDeleted }
       />
-      <AddTask/>
+      <AddTask addItem = { this.itemAdd }/>
     </div>
   );
 
