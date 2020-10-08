@@ -14,14 +14,17 @@ export default class TasksList extends React.Component {
 
   render() {
 
-    const { tasks } = this.props;
+    const { tasks, itemDeleted } = this.props;
 
     const elements = tasks.map( (item) => {
+
+      const { id, ...itemProps } = item;
+
       return (
-        <li key={item.id}>
+        <li key={id}>
           <TaskItem 
-            text={item.text}
-            important={item.important}
+            { ...itemProps }
+            delItem={ () => itemDeleted(id) }
             />
         </li>
       );

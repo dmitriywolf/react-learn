@@ -33,7 +33,7 @@ export default class TaskItem extends Component {
  
 
   render() {
-    const { text } = this.props;
+    const { text, delItem } = this.props;
     const { done, important } = this.state;
 
     let textClassNames = "task-item__text";
@@ -62,7 +62,9 @@ export default class TaskItem extends Component {
           <button className="task-item__btn btn btn-outline-warning" type="button" onClick={this.onImportant}>
             !
           </button>
-          <button className="task-item__btn btn btn-outline-danger" type="button">
+          <button className="task-item__btn btn btn-outline-danger" 
+            type="button"
+            onClick={ delItem }>
             X
           </button>
         </span>
