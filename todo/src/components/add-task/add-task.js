@@ -19,7 +19,7 @@ export default class AddTask extends Component {
           <div className="input-group-prepend"> 
             <button className="btn btn-outline-dark" 
                type="button"
-               onClick={ addItem }>
+               onClick={ () => addItem('New Task') }>
               Add Task
            </button>
           </div>

@@ -10,33 +10,38 @@ import "./app.css";
 
 
 export default class App extends Component {
-
   maxId = 100;
 
   state = {
     tasksArr: [
-      {id: 1, text: 'Изучить React + Redux', important: true}, 
-      {id: 2, text: 'Изучить Node.js', important: true}, 
-      {id: 3, text: 'Изучить Express.js', important: false}, 
-      {id: 4, text: 'И наконец MongoDB', important: false}
+      this.createTaskItem('Изучить React + Redux'),
+      this.createTaskItem('Изучить Node.js'),
+      this.createTaskItem('Изучить Express.js'),
+      this.createTaskItem('И наконец MongoDB')
     ]
   };
 
+  // функция создания элемента 
+  createTaskItem(text) {
+    return {
+      id: this.maxId++,
+      text,
+      important: false,
+      done: false
+    }
+  }
+
   itemDeleted = (id) => {
     this.setState( ( { tasksArr }) => {
-
       // индекс элемента который собираемся удалять
       const index = tasksArr.findIndex( (el) => el.id === id);
-     
+  
       // массив до нужного элемента
       const before = tasksArr.slice(0, index);
-
       // массив после нужного элемента
       const after = tasksArr.slice(index + 1);
-
       // объединяем в новыый массив и получаем новый стейт
       const newArr = [ ...before, ...after];
-
       return {
         tasksArr: newArr
       };
@@ -44,45 +49,49 @@ export default class App extends Component {
     });
   };
 
-  itemAdd = () => {
-
+  itemAdd = ( text ) => {
     // создаем новый элемент 
-    const newItem = {
-      id: this.maxId++,
-      text: "New Task",
-      important: false
-    };
+    const newItem = this.createTaskItem(text);
 
     this.setState( ( { tasksArr } ) => {
       // создаем новый массив который состоит из старого + новый элемент
       const newArr = [
         ...tasksArr, newItem
       ];
-
       return {
         tasksArr: newArr
       };
+    });
+  };
+
+  onImportant = (id) => {
+    this.setState( ( { tasksArr }) => {
+      
 
     });
   };
 
- render() {
+  onDone = (id) => {
+    console.log(`done: ${id}`);
+  };
 
+
+ render() {
   const { tasksArr } = this.state;
 
   return (
-
     <div className="app">
-      <AppHeader todo="3" done="1"/>
+      <AppHeader todo="2" done="3"/>
 
       <div>
          <SearchPanel/>
          <TaskFilter/>
       </div>
-      
       <TasksList 
         tasks={ tasksArr }
         itemDeleted = { this.itemDeleted }
+        onDone = { this.onDone }
+        onImportant = {this.onImportant }
       />
       <AddTask addItem = { this.itemAdd }/>
     </div>

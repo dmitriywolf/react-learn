@@ -14,7 +14,7 @@ export default class TasksList extends React.Component {
 
   render() {
 
-    const { tasks, itemDeleted } = this.props;
+    const { tasks, itemDeleted, onDone, onImportant} = this.props;
 
     const elements = tasks.map( (item) => {
 
@@ -25,6 +25,8 @@ export default class TasksList extends React.Component {
           <TaskItem 
             { ...itemProps }
             delItem={ () => itemDeleted(id) }
+            onDone={ () => onDone(id) }
+            onImportant={ () => onImportant(id) }
             />
         </li>
       );
