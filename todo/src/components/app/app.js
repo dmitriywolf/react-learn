@@ -18,7 +18,8 @@ export default class App extends Component {
       this.createTaskItem('Изучить Node.js'),
       this.createTaskItem('Изучить Express.js'),
       this.createTaskItem('И наконец MongoDB')
-    ]
+    ],
+    searchText: ''
   };
 
   // Функция создания элемента 
@@ -64,9 +65,6 @@ export default class App extends Component {
     });
   };
 
-
-
-
   // фцнкция переключения значения свойств
   toggleProp(array, id, prop) {
     const index = array.findIndex( (el) => el.id === id);
@@ -97,9 +95,21 @@ export default class App extends Component {
     });
   };
 
+  search(items, search){
+    if(search.length === 0) {
+      return items;
+    }
+
+    return items.filter( ( item ) => {
+     return  item.text.indexOf(search)>-1;
+    });
+  };
+
 
  render() {
-  const { tasksArr } = this.state;
+  const { tasksArr, searchText } = this.state;
+
+  const visibleItems = this.search( tasksArr, searchText);
 
   const doneCount = tasksArr.filter( (el) => el.done ).length;
   const todoCount = tasksArr.length - doneCount;
@@ -113,7 +123,7 @@ export default class App extends Component {
          <TaskFilter/>
       </div>
       <TasksList 
-        tasks={ tasksArr }
+        tasks={ visibleItems }
         itemDeleted = { this.itemDeleted }
         onDone = { this.onDone }
         onImportant = {this.onImportant }
