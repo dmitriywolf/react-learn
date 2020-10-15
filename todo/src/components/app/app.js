@@ -64,28 +64,37 @@ export default class App extends Component {
     });
   };
 
+
+
+
+  // фцнкция переключения значения свойств
+  toggleProp(array, id, prop) {
+    const index = array.findIndex( (el) => el.id === id);
+
+    const oldItem = array[index];
+    const newItem = { ...oldItem, [prop]: !oldItem[prop] };
+
+    return [
+      ...array.slice(0, index), 
+      newItem,
+      ...array.slice(index + 1)
+    ];
+  };
+
   onDone = (id) => {
     this.setState( ( {tasksArr} ) => {
-      const index = tasksArr.findIndex( (el) => el.id === id);
-
-      const oldItem = tasksArr[index];
-      const newItem = { ...oldItem, done: !oldItem.done };
-
-      const newArr = [
-        ...tasksArr.slice(0, index), 
-        newItem,
-        ...tasksArr.slice(index + 1)
-      ];
-
       return {
-        tasksArr: newArr
+        tasksArr: this.toggleProp(tasksArr, id, 'done')
       }
     });
-
   };
 
   onImportant = (id) => {
-    console.log(`done: ${id}`);
+    this.setState( ( {tasksArr} ) => {
+      return {
+        tasksArr: this.toggleProp(tasksArr, id, 'important')
+      }
+    });
   };
 
 
