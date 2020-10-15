@@ -21,7 +21,7 @@ export default class App extends Component {
     ]
   };
 
-  // функция создания элемента 
+  // Функция создания элемента 
   createTaskItem(text) {
     return {
       id: this.maxId++,
@@ -64,14 +64,27 @@ export default class App extends Component {
     });
   };
 
-  onImportant = (id) => {
-    this.setState( ( { tasksArr }) => {
-      
+  onDone = (id) => {
+    this.setState( ( {tasksArr} ) => {
+      const index = tasksArr.findIndex( (el) => el.id === id);
 
+      const oldItem = tasksArr[index];
+      const newItem = { ...oldItem, done: !oldItem.done };
+
+      const newArr = [
+        ...tasksArr.slice(0, index), 
+        newItem,
+        ...tasksArr.slice(index + 1)
+      ];
+
+      return {
+        tasksArr: newArr
+      }
     });
+
   };
 
-  onDone = (id) => {
+  onImportant = (id) => {
     console.log(`done: ${id}`);
   };
 
@@ -79,9 +92,12 @@ export default class App extends Component {
  render() {
   const { tasksArr } = this.state;
 
+  const doneCount = tasksArr.filter( (el) => el.done ).length;
+  const todoCount = tasksArr.length - doneCount;
+
   return (
     <div className="app">
-      <AppHeader todo="2" done="3"/>
+      <AppHeader todo={ todoCount } done={ doneCount }/>
 
       <div>
          <SearchPanel/>
