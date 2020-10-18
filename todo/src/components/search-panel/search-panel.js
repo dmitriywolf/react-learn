@@ -8,20 +8,20 @@ export default class SearchPanel extends Component {
 
   onSearch = (e) => {
     const searchText = e.target.value;
-    this.setState( {searchText} );
-    this.props.onSearch( searchText );
+    this.setState({searchText});
+    this.props.onSearch(searchText);
   };
 
-  render(){
+  render() {
 
-    return(
-      <div className="search-panel input-group">
-        <div className="input-group-prepend">
-          <span className="input-group-text">Search:</span>
+    return (
+        <div className="search-panel input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text">Search:</span>
+          </div>
+          <input className="form-control" type="text" placeholder="type to search" value={this.state.searchText}
+                 onChange={this.onSearch}/>
         </div>
-        <input className="form-control" type="text" placeholder="type to search"  value={this.state.searchText} 
-        onChange={this.onSearch}/>
-      </div>
     );
   }
 }

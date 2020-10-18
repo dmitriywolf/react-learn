@@ -4,38 +4,31 @@ import TaskItem from '../task-item/'
 import "./tasks-list.css";
 
 
-
 export default class TasksList extends React.Component {
-  constructor(props) {
-    super();
-
-  }
-
-
   render() {
 
-    const { tasks, itemDeleted, onDone, onImportant} = this.props;
+    const {tasks, itemDeleted, onDone, onImportant} = this.props;
 
-    const elements = tasks.map( (item) => {
+    const elements = tasks.map((item) => {
 
-      const { id, ...itemProps } = item;
+      const {id, ...itemProps} = item;
 
       return (
-        <li key={id}>
-          <TaskItem 
-            { ...itemProps }
-            delItem={ () => itemDeleted(id) }
-            onDone={ () => onDone(id) }
-            onImportant={ () => onImportant(id) }
+          <li key={id}>
+            <TaskItem
+                {...itemProps}
+                delItem={() => itemDeleted(id)}
+                onDone={() => onDone(id)}
+                onImportant={() => onImportant(id)}
             />
-        </li>
+          </li>
       );
     });
-  
+
     return (
-      <ul className="tasks-list"> 
-        {elements}
-      </ul>
+        <ul className="tasks-list">
+          {elements}
+        </ul>
     )
   }
 }

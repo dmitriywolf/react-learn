@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWepackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-module.exports = ( env = {} ) =>  {
+module.exports = (env = {}) => {
 
   // Определяем значение перменной
   const {mode = 'development'} = env;
@@ -23,7 +23,7 @@ module.exports = ( env = {} ) =>  {
       })
     ];
 
-    if(isProd) {
+    if (isProd) {
       plugins.push(new MiniCssExtractPlugin({
         filename: 'main-[hash:8].css'
       }))
@@ -39,21 +39,21 @@ module.exports = ( env = {} ) =>  {
       filename: isProd ? 'bundle-[hash:8].js' : undefined,
       path: path.resolve(__dirname, 'dist'),
     },
-  
-  
+
+
     module: {
       rules: [
         // Babel-loader
-        { 
-          test: /\.(js|jsx)$/, 
+        {
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
         },
-  
+
         // Loading Images
-       {
-         test: /\.(png|jpg|jpeg|gif|ico)$/,
-         use: [{
+        {
+          test: /\.(png|jpg|jpeg|gif|ico)$/,
+          use: [{
             loader: 'file-loader',
             options: {
               outputPath: 'img',
@@ -65,30 +65,30 @@ module.exports = ( env = {} ) =>  {
         {
           test: /\.(ttf|otf|eot|woff|woff2)$/,
           use: [{
-             loader: 'file-loader',
-             options: {
-               outputPath: 'fonts',
-               name: '[name].[ext]'
-             }
-           }]
-         },
-  
-         // Loading CSS
-         {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'fonts',
+              name: '[name].[ext]'
+            }
+          }]
+        },
+
+        // Loading CSS
+        {
           test: /\.(css)$/,
           use: getStyleLoaders()
-         },
-  
-         // Loading SCSS/SASS
-         {
+        },
+
+        // Loading SCSS/SASS
+        {
           test: /\.(s[ca]ss)$/,
-          use: [ ...getStyleLoaders(), 'sass-loader']
-         }
+          use: [...getStyleLoaders(), 'sass-loader']
+        }
       ]
     },
-  
+
     plugins: getPlugins(),
-  
+
     devServer: {
       open: true   // open in browser
     }

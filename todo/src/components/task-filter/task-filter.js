@@ -2,18 +2,39 @@ import React, {Component} from 'react';
 import "./task-filter.css";
 
 export default class TaskFilter extends Component {
-  constructor() {
-   super();
-  }
 
-  render(){
+  btns = [
+    {name: 'all', label: "All"},
+    {name: 'active', label: "Active"},
+    {name: 'important', label: "Important"},
+    {name: 'done', label: "Done"},
+  ];
+
+  render() {
+
+    const {filter, onFilterChange} = this.props;
+
+    const btns = this.btns.map(({name, label}) => {
+
+      const isActive = filter === name;
+      const claz = isActive ? 'active' : '';
+
+      return (
+          <button
+              className={`task-filter-btn btn btn-outline-dark ${claz}`}
+              type="button"
+              key={name}
+              onClick={() => onFilterChange(name)}>
+            {label}
+          </button>
+      )
+    });
+
+
     return (
-      <div className="task-filter btn-group">
-        <button className="task-filter-btn btn btn-outline-dark active" type="button">All</button>
-        <button className="task-filter-btn btn btn-outline-dark" type="button">Active</button>
-        <button className="task-filter-btn btn btn-outline-dark" type="button">Important</button>
-        <button className="task-filter-btn btn btn-outline-dark" type="button">Done</button>
-      </div>
+        <div className="task-filter btn-group">
+          {btns}
+        </div>
     );
   }
 

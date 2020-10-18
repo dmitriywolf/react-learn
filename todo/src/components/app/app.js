@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import AppHeader from "../app-header/app-header";
 import SearchPanel from '../search-panel/search-panel';
 import TaskFilter from '../task-filter/task-filter';
@@ -16,7 +16,8 @@ export default class App extends Component {
       this.createTaskItem('Изучить Express.js'),
       this.createTaskItem('И наконец MongoDB')
     ],
-    searchText: ''
+    searchText: '',
+    filter: 'all'  // all, active, done, important
   };
 
   // Функция создания элемента 
@@ -30,16 +31,16 @@ export default class App extends Component {
   }
 
   itemDeleted = (id) => {
-    this.setState( ( { tasksArr }) => {
+    this.setState(({tasksArr}) => {
       // индекс элемента который собираемся удалять
-      const index = tasksArr.findIndex( (el) => el.id === id);
-  
+      const index = tasksArr.findIndex((el) => el.id === id);
+
       // массив до нужного элемента
       const before = tasksArr.slice(0, index);
       // массив после нужного элемента
       const after = tasksArr.slice(index + 1);
       // объединяем в новыый массив и получаем новый стейт
-      const newArr = [ ...before, ...after];
+      const newArr = [...before, ...after];
       return {
         tasksArr: newArr
       };
@@ -47,11 +48,11 @@ export default class App extends Component {
     });
   };
 
-  itemAdd = ( text ) => {
+  itemAdd = (text) => {
     // создаем новый элемент 
     const newItem = this.createTaskItem(text);
 
-    this.setState( ( { tasksArr } ) => {
+    this.setState(({tasksArr}) => {
       // создаем новый массив который состоит из старого + новый элемент
       const newArr = [
         ...tasksArr, newItem
@@ -64,20 +65,20 @@ export default class App extends Component {
 
   // фцнкция переключения значения свойств
   toggleProp(array, id, prop) {
-    const index = array.findIndex( (el) => el.id === id);
+    const index = array.findIndex((el) => el.id === id);
 
     const oldItem = array[index];
-    const newItem = { ...oldItem, [prop]: !oldItem[prop] };
+    const newItem = {...oldItem, [prop]: !oldItem[prop]};
 
     return [
-      ...array.slice(0, index), 
+      ...array.slice(0, index),
       newItem,
       ...array.slice(index + 1)
     ];
   };
 
   onDone = (id) => {
-    this.setState( ( {tasksArr} ) => {
+    this.setState(({tasksArr}) => {
       return {
         tasksArr: this.toggleProp(tasksArr, id, 'done')
       }
@@ -85,51 +86,72 @@ export default class App extends Component {
   };
 
   onImportant = (id) => {
-    this.setState( ( {tasksArr} ) => {
+    this.setState(({tasksArr}) => {
       return {
         tasksArr: this.toggleProp(tasksArr, id, 'important')
       }
     });
   };
 
-  search(items, search){
-    if(search.length === 0) {
+  search(items, search) {
+    if (search.length === 0) {
       return items;
     }
 
-    return items.filter( ( item ) => {
-     return  item.text.toLowerCase().indexOf(search.toLowerCase())>-1;
+    return items.filter((item) => {
+      return item.text.toLowerCase().indexOf(search.toLowerCase()) > -1;
     });
   };
 
   onSearch = (searchText) => {
-    this.setState( {searchText});
+    this.setState({searchText});
+  };
+
+  filter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "active":
+        return items.filter((item) => !item.done);
+      case "done":
+        return items.filter((item) => item.done);
+      case "important":
+        return items.filter((item) => item.important);
+      default:
+        return items;
+    }
+  };
+
+  onFilterChange = (filter) => {
+    this.setState({filter});
   };
 
 
- render() {
-  const { tasksArr, searchText } = this.state;
-  const visibleItems = this.search( tasksArr, searchText);
-  const doneCount = tasksArr.filter( (el) => el.done ).length;
-  const todoCount = tasksArr.length - doneCount;
+  render() {
+    const {tasksArr, searchText, filter} = this.state;
 
-  return (
-    <div className="app">
-      <AppHeader todo={ todoCount } done={ doneCount }/>
-      <div>
-         <SearchPanel onSearch={this.onSearch}/>
-         <TaskFilter/>
-      </div>
-      <TasksList 
-        tasks={ visibleItems }
-        itemDeleted = { this.itemDeleted }
-        onDone = { this.onDone }
-        onImportant = {this.onImportant }
-      />
-      <AddTask addItem = { this.itemAdd }/>
-    </div>
-  );
- };
+    const visibleItems = this.filter(this.search(tasksArr, searchText), filter);
+
+    const doneCount = tasksArr.filter((el) => el.done).length;
+    const todoCount = tasksArr.length - doneCount;
+
+    return (
+        <div className="app">
+          <AppHeader todo={todoCount} done={doneCount}/>
+          <div>
+            <SearchPanel onSearch={this.onSearch}/>
+            <TaskFilter filter={filter} onFilterChange={this.onFilterChange}/>
+          </div>
+          <TasksList
+              tasks={visibleItems}
+              itemDeleted={this.itemDeleted}
+              onDone={this.onDone}
+              onImportant={this.onImportant}
+          />
+          <AddTask addItem={this.itemAdd}/>
+        </div>
+    );
+  };
 }
 
 
