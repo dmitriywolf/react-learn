@@ -2,10 +2,15 @@ import React, {Component} from 'react';
 import "./search-panel.css";
 
 export default class SearchPanel extends Component {
+  state = {
+    searchText: ""
+  };
 
-  constructor() {
-    super();
-  }
+  onSearch = (e) => {
+    const searchText = e.target.value;
+    this.setState( {searchText} );
+    this.props.onSearch( searchText );
+  };
 
   render(){
 
@@ -14,7 +19,8 @@ export default class SearchPanel extends Component {
         <div className="input-group-prepend">
           <span className="input-group-text">Search:</span>
         </div>
-        <input  className="form-control" type="text" placeholder="type to search" />
+        <input className="form-control" type="text" placeholder="type to search"  value={this.state.searchText} 
+        onChange={this.onSearch}/>
       </div>
     );
   }

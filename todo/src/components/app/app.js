@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-
 import AppHeader from "../app-header/app-header";
 import SearchPanel from '../search-panel/search-panel';
 import TaskFilter from '../task-filter/task-filter';
 import TasksList from "../task-list/tasks-list";
 import AddTask from '../add-task/add-task';
-
 import "./app.css";
-
 
 export default class App extends Component {
   maxId = 100;
@@ -101,25 +98,26 @@ export default class App extends Component {
     }
 
     return items.filter( ( item ) => {
-     return  item.text.indexOf(search)>-1;
+     return  item.text.toLowerCase().indexOf(search.toLowerCase())>-1;
     });
+  };
+
+  onSearch = (searchText) => {
+    this.setState( {searchText});
   };
 
 
  render() {
   const { tasksArr, searchText } = this.state;
-
   const visibleItems = this.search( tasksArr, searchText);
-
   const doneCount = tasksArr.filter( (el) => el.done ).length;
   const todoCount = tasksArr.length - doneCount;
 
   return (
     <div className="app">
       <AppHeader todo={ todoCount } done={ doneCount }/>
-
       <div>
-         <SearchPanel/>
+         <SearchPanel onSearch={this.onSearch}/>
          <TaskFilter/>
       </div>
       <TasksList 
@@ -131,7 +129,6 @@ export default class App extends Component {
       <AddTask addItem = { this.itemAdd }/>
     </div>
   );
-
  };
 }
 
