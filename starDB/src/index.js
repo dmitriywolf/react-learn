@@ -12,6 +12,6 @@ ReactDOM.render (
   document.querySelector('#root')
 )
 
-const swapi = new SwapiService();
-swapi.getPerson(3)
-.then( people => console.log(people.name))
+// const swapi = new SwapiService();
+// swapi.getPerson(3)
+// .then( people => console.log(people.name))
