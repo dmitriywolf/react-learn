@@ -9,7 +9,7 @@ import './app.css';
 
 export default class App extends React.Component {
   state={
-    slectedPerson: null
+    slectedPerson: 5
   };
 
   onPersonSelected = (id)=> {
@@ -29,7 +29,7 @@ export default class App extends React.Component {
           <ItemList onItemSelected={this.onPersonSelected} />
         </div>
         <div className="col-md-6">
-          <PersonDetails personid={this.state.slectedPerson}/>
+          <PersonDetails personId={this.state.slectedPerson}/>
         </div>
       </div>
     </div>
