@@ -6,7 +6,7 @@ const withData = (View) => {
   return class extends Component {
 
     state = {
-      data: null
+      data: null,
     };
 
     componentDidMount() {
