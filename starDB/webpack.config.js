@@ -38,6 +38,7 @@ module.exports = ( env = {} ) =>  {
     output: {
       filename: isProd ? 'bundle-[hash:8].js' : undefined,
       path: path.resolve(__dirname, 'dist'),
+      // publicPath: '/'
     },
   
   
@@ -90,7 +91,8 @@ module.exports = ( env = {} ) =>  {
     plugins: getPlugins(),
   
     devServer: {
-      open: true   // open in browser
+      open: true,   // open in browser
+      historyApiFallback: true
     }
   };
 };
