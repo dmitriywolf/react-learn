@@ -1,5 +1,5 @@
 
-export const reducer = ( state, action ) => {
+export const reducer = ( state = 15, action ) => {
 
   if(state === undefined) {
     return 0;
