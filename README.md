@@ -1,1 +1,1 @@
-[toDoList](https://dmitriywolf.github.io/toDoList/dist/)
+[todo list on React](https://dmitriywolf.github.io/todo/dist/)
